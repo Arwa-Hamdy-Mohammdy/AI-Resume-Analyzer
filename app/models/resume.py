@@ -18,3 +18,14 @@ class Resume(Base):
     user_id = Column(Integer, ForeignKey("users.id"))
 
     user = relationship("User")
+
+    analysis = relationship(
+        "ResumeAnalysis",
+        back_populates="resume",
+        uselist=False
+    )
+
+    matches = relationship(
+    "JobMatch",
+    back_populates="resume"
+    )

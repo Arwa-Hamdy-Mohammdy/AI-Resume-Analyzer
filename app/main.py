@@ -6,6 +6,9 @@ from app.routers.auth import router as auth_router
 from app.routers.jobs import router as jobs_router
 from app.routers.resume import router as resume_router
 from app.models.resume import Resume
+from app.models.resume_analysis import ResumeAnalysis
+from app.routers.job_match_router import router as job_match_router
+
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
@@ -16,7 +19,7 @@ app = FastAPI(
 app.include_router(auth_router)
 app.include_router(jobs_router)
 app.include_router(resume_router)
-
+app.include_router(job_match_router)
 @app.get("/")
 def home():
     return {

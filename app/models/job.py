@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String, Text
+from sqlalchemy.orm import relationship
 
 from app.database import Base
 
@@ -19,3 +20,8 @@ class Job(Base):
     required_skills = Column(Text, nullable=False)
 
     experience_level = Column(String(100), nullable=False)
+
+    matches = relationship(
+        "JobMatch",
+        back_populates="job"
+    )
