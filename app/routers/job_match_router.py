@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from app.database import get_db
+from app.core.dependencies import get_current_user
 from app.models.user import User
 from app.schemas.job_match import JobMatchCreate, JobMatchResponse
 from app.services.job_match_service import JobMatchService
-from app.core.security import get_current_user
 
 router = APIRouter(
     prefix="/matching",

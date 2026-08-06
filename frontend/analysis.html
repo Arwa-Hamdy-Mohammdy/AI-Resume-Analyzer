@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Analysis - AI Resume Analyzer</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <h2>AI Resume Analyzer</h2>
+            </div>
+
+            <ul class="sidebar-nav">
+                <li>
+                    <a href="dashboard.html">
+                        <i class="fa-solid fa-chart-pie"></i> Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="upload.html">
+                        <i class="fa-solid fa-file-arrow-up"></i> Upload Resume
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="analysis.html" class="active">
+                        <i class="fa-solid fa-brain"></i> Resume Analysis
+                    </a>
+                </li>
+                <li>
+                    <a href="jobs.html">
+                        <i class="fa-solid fa-briefcase"></i> Jobs
+                    </a>
+                </li>
+                <li>
+                    <a href="matching.html">
+                        <i class="fa-solid fa-bullseye"></i> Job Matching
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <button id="logoutBtn">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="content-header">
+                <h1>Resume Analysis <i class="fa-solid fa-brain" style="color: #6366f1;"></i></h1>
+                <p>Comprehensive AI-generated insights extracted from your resume</p>
+            </div>
+
+            <div id="loading" style="text-align: center; padding: 60px 20px;">
+                <i class="fa-solid fa-spinner fa-spin" style="font-size: 40px; color: var(--primary); margin-bottom: 16px;"></i>
+                <p style="font-size: 16px; font-weight: 600; color: var(--primary);">Fetching AI analysis results...</p>
+            </div>
+
+            <div id="errorState" style="display: none; padding: 40px; text-align: center;" class="card-box">
+                <i class="fa-solid fa-file-circle-exclamation" style="font-size: 50px; color: #ef4444; margin-bottom: 16px;"></i>
+                <h3 style="color: var(--text-dark); font-size: 20px; margin-bottom: 10px;">No Resume Analysis Found</h3>
+                <p id="errorText" style="color: var(--text-muted); margin-bottom: 24px; font-size: 15px;"></p>
+                <a href="upload.html" class="btn-primary" style="display: inline-flex; text-decoration: none; width: auto; padding: 12px 28px;">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> Upload Resume Now
+                </a>
+            </div>
+
+            <div id="analysisContent" style="display: none;" class="card-box">
+                
+                <div class="analysis-section">
+                    <h3><i class="fa-solid fa-file-lines"></i> Executive Summary</h3>
+                    <div class="analysis-box" id="summaryBox"></div>
+                </div>
+
+                <div class="analysis-section">
+                    <h3><i class="fa-solid fa-lightbulb"></i> Extracted Skills</h3>
+                    <div id="skillsBox" style="margin-top: 10px;"></div>
+                </div>
+
+                <div class="analysis-section">
+                    <h3><i class="fa-solid fa-graduation-cap"></i> Education</h3>
+                    <div class="list-box" id="educationBox"></div>
+                </div>
+
+                <div class="analysis-section">
+                    <h3><i class="fa-solid fa-briefcase"></i> Work Experience</h3>
+                    <div class="list-box" id="experienceBox"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="js/analysis.js"></script>
+
+</body>
+
+</html>

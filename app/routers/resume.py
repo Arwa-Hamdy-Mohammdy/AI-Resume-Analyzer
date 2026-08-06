@@ -29,6 +29,33 @@ def upload_resume(
     )
 
 @router.get(
+    "/latest",
+    response_model=ResumeResponse
+)
+def get_latest_resume(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    latest_resume = resume_service.resume_repository.get_latest_by_user(db, current_user.id)
+    if not latest_resume:
+        from fastapi import HTTPException
+        raise HTTPException(status_code=404, detail="No resume uploaded yet.")
+    return latest_resume
+
+@router.get(
+    "/latest/analysis",
+    response_model=ResumeAnalysisResponse
+)
+def get_latest_resume_analysis(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    return resume_service.get_latest_analysis(
+        db,
+        current_user.id
+    )
+
+@router.get(
     "/{resume_id}/analysis",
     response_model=ResumeAnalysisResponse
 )

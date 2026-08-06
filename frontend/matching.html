@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Matching - AI Resume Analyzer</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <h2>AI Resume Analyzer</h2>
+            </div>
+
+            <ul class="sidebar-nav">
+                <li>
+                    <a href="dashboard.html">
+                        <i class="fa-solid fa-chart-pie"></i> Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="upload.html">
+                        <i class="fa-solid fa-file-arrow-up"></i> Upload Resume
+                    </a>
+                </li>
+                <li>
+                    <a href="analysis.html">
+                        <i class="fa-solid fa-brain"></i> Resume Analysis
+                    </a>
+                </li>
+                <li>
+                    <a href="jobs.html">
+                        <i class="fa-solid fa-briefcase"></i> Jobs
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="matching.html" class="active">
+                        <i class="fa-solid fa-bullseye"></i> Job Matching
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <button id="logoutBtn">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="content-header">
+                <h1>Job Matching & ATS Score <i class="fa-solid fa-bullseye" style="color: #ea580c;"></i></h1>
+                <p>Compare your uploaded resume against target job requirements</p>
+            </div>
+
+            <div class="card-box" style="max-width: 680px;">
+                <form id="matchForm" onsubmit="return false;">
+                    <label style="display:block; margin-bottom:10px; font-weight:700; color: var(--text-dark);">Select Target Job Position:</label>
+                    <div class="input-group">
+                        <i class="fa-solid fa-briefcase"></i>
+                        <select id="jobSelect" required>
+                            <option value="">-- Select a Job Position --</option>
+                        </select>
+                    </div>
+
+                    <button type="button" id="matchBtn" style="margin-top: 10px;">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Calculate ATS Match Score
+                    </button>
+                </form>
+
+                <p id="matchMessage" style="margin-top: 18px; font-weight: 600; font-size: 15px;"></p>
+            </div>
+
+            <div id="resultBox" class="card-box" style="display: none; max-width: 680px; margin-top: 28px;">
+                <h2 style="font-size: 20px; font-weight: 800; color: var(--text-dark); margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-chart-column" style="color: var(--primary);"></i> Match Evaluation Results
+                </h2>
+                
+                <div class="score-box">
+                    <p style="color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; font-size: 13px;">ATS Match Percentage</p>
+                    <div class="score-number" id="scoreValue">0%</div>
+                </div>
+
+                <div style="margin-bottom: 25px;">
+                    <h3 style="font-size: 16px; font-weight: 700; color: #15803d; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-circle-check"></i> Matching Skills & Strengths
+                    </h3>
+                    <div id="matchingSkillsBox" style="margin-top: 10px;"></div>
+                </div>
+
+                <div style="margin-bottom: 25px;">
+                    <h3 style="font-size: 16px; font-weight: 700; color: #b91c1c; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-circle-xmark"></i> Missing Skills & Gaps
+                    </h3>
+                    <div id="missingSkillsBox" style="margin-top: 10px;"></div>
+                </div>
+
+                <div>
+                    <h3 style="font-size: 16px; font-weight: 700; color: var(--primary); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-lightbulb"></i> AI Resume Recommendations
+                    </h3>
+                    <div id="recommendationsBox" style="margin-top: 10px; line-height: 1.6; color: #334155; background: #f8fafc; padding: 18px 22px; border-radius: var(--radius-md); border: 1px solid var(--border-color);"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="js/matching.js"></script>
+
+</body>
+
+</html>

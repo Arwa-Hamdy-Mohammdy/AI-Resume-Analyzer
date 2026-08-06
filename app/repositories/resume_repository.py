@@ -40,3 +40,16 @@ class ResumeRepository:
             .filter(Resume.id == resume_id)
             .first()
         )
+
+    def get_latest_by_user(
+        self,
+        db: Session,
+        user_id: int
+    ):
+
+        return (
+            db.query(Resume)
+            .filter(Resume.user_id == user_id)
+            .order_by(Resume.id.desc())
+            .first()
+        )

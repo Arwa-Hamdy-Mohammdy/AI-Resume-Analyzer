@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobs - AI Resume Analyzer</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <h2>AI Resume Analyzer</h2>
+            </div>
+
+            <ul class="sidebar-nav">
+                <li>
+                    <a href="dashboard.html">
+                        <i class="fa-solid fa-chart-pie"></i> Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="upload.html">
+                        <i class="fa-solid fa-file-arrow-up"></i> Upload Resume
+                    </a>
+                </li>
+                <li>
+                    <a href="analysis.html">
+                        <i class="fa-solid fa-brain"></i> Resume Analysis
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="jobs.html" class="active">
+                        <i class="fa-solid fa-briefcase"></i> Jobs
+                    </a>
+                </li>
+                <li>
+                    <a href="matching.html">
+                        <i class="fa-solid fa-bullseye"></i> Job Matching
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <button id="logoutBtn">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="content-header">
+                <h1>Browse Jobs <i class="fa-solid fa-briefcase" style="color: #db2777;"></i></h1>
+                <p>Explore job positions or publish new opportunities</p>
+            </div>
+
+            <div class="card-box" style="margin-bottom: 30px;">
+                <h3 style="margin-bottom: 18px; font-size: 18px; color: var(--text-dark); display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-circle-plus" style="color: var(--primary);"></i> Post New Job Opening
+                </h3>
+                <form id="createJobForm">
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <i class="fa-solid fa-user-doctor"></i>
+                            <input type="text" id="jobTitle" placeholder="Job Title (e.g. Python Developer)" required>
+                        </div>
+                        <div class="input-group">
+                            <i class="fa-solid fa-building"></i>
+                            <input type="text" id="company" placeholder="Company Name (e.g. Google)" required>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <input type="text" id="location" placeholder="Location (e.g. Remote / Cairo)" required>
+                        </div>
+                        <div class="input-group">
+                            <i class="fa-solid fa-layer-group"></i>
+                            <select id="experienceLevel" class="no-icon" required>
+                                <option value="Junior">Experience Level: Junior</option>
+                                <option value="Mid-Level">Experience Level: Mid-Level</option>
+                                <option value="Senior">Experience Level: Senior</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-list-check"></i>
+                        <input type="text" id="requiredSkills" placeholder="Required Skills (comma separated, e.g. Python, FastAPI, SQL)" required>
+                    </div>
+                    <textarea id="description" placeholder="Detailed Job Description & Requirements" rows="3" style="width:100%; margin-bottom:18px;" required class="no-icon"></textarea>
+                    <button type="submit" id="createJobBtn" style="width: auto; padding: 12px 30px;">
+                        <i class="fa-solid fa-paper-plane"></i> Publish Job Listing
+                    </button>
+                </form>
+                <p id="jobFormMessage" style="margin-top: 15px; font-weight: 600;"></p>
+            </div>
+
+            <h2 style="font-size: 20px; font-weight: 800; color: var(--text-dark); margin-bottom: 18px;">Available Job Positions</h2>
+            <div id="jobsList">
+                <p style="color: var(--text-muted); font-weight: 500;">Loading jobs...</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="js/jobs.js"></script>
+
+</body>
+
+</html>

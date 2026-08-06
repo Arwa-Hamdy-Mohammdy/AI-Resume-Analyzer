@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - AI Resume Analyzer</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <h2>AI Resume Analyzer</h2>
+            </div>
+
+            <ul class="sidebar-nav">
+                <li class="active">
+                    <a href="dashboard.html" class="active">
+                        <i class="fa-solid fa-chart-pie"></i> Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="upload.html">
+                        <i class="fa-solid fa-file-arrow-up"></i> Upload Resume
+                    </a>
+                </li>
+                <li>
+                    <a href="analysis.html">
+                        <i class="fa-solid fa-brain"></i> Resume Analysis
+                    </a>
+                </li>
+                <li>
+                    <a href="jobs.html">
+                        <i class="fa-solid fa-briefcase"></i> Jobs
+                    </a>
+                </li>
+                <li>
+                    <a href="matching.html">
+                        <i class="fa-solid fa-bullseye"></i> Job Matching
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <button id="logoutBtn">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="content-header">
+                <h1>Welcome Back 👋</h1>
+                <p id="userName">Manage your resumes and explore job matching opportunities</p>
+            </div>
+
+            <div class="cards">
+
+                <a href="upload.html" style="text-decoration:none; color:inherit;">
+                    <div class="card-box" style="cursor:pointer;">
+                        <div class="card-box-icon">
+                            <i class="fa-solid fa-file-arrow-up"></i>
+                        </div>
+                        <h3>Upload Resume</h3>
+                        <p>Upload your PDF resume for instant AI text extraction</p>
+                    </div>
+                </a>
+
+                <a href="analysis.html" style="text-decoration:none; color:inherit;">
+                    <div class="card-box" style="cursor:pointer;">
+                        <div class="card-box-icon" style="background:#f0fdf4; color:#16a34a;">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <h3>AI Analysis</h3>
+                        <p>View AI extracted summary, skills, education, & experience</p>
+                    </div>
+                </a>
+
+                <a href="jobs.html" style="text-decoration:none; color:inherit;">
+                    <div class="card-box" style="cursor:pointer;">
+                        <div class="card-box-icon" style="background:#fdf2f8; color:#db2777;">
+                            <i class="fa-solid fa-briefcase"></i>
+                        </div>
+                        <h3>Explore Jobs</h3>
+                        <p>Browse available job listings or post new opportunities</p>
+                    </div>
+                </a>
+
+                <a href="matching.html" style="text-decoration:none; color:inherit;">
+                    <div class="card-box" style="cursor:pointer;">
+                        <div class="card-box-icon" style="background:#fff7ed; color:#ea580c;">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <h3>ATS Matching</h3>
+                        <p>Calculate matching score & skill gaps against positions</p>
+                    </div>
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="js/dashboard.js"></script>
+
+</body>
+
+</html>

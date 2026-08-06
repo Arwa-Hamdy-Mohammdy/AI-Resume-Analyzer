@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Resume - AI Resume Analyzer</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <h2>AI Resume Analyzer</h2>
+            </div>
+
+            <ul class="sidebar-nav">
+                <li>
+                    <a href="dashboard.html">
+                        <i class="fa-solid fa-chart-pie"></i> Dashboard
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="upload.html" class="active">
+                        <i class="fa-solid fa-file-arrow-up"></i> Upload Resume
+                    </a>
+                </li>
+                <li>
+                    <a href="analysis.html">
+                        <i class="fa-solid fa-brain"></i> Resume Analysis
+                    </a>
+                </li>
+                <li>
+                    <a href="jobs.html">
+                        <i class="fa-solid fa-briefcase"></i> Jobs
+                    </a>
+                </li>
+                <li>
+                    <a href="matching.html">
+                        <i class="fa-solid fa-bullseye"></i> Job Matching
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <button id="logoutBtn">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="content-header">
+                <h1>Upload Resume <i class="fa-solid fa-file-pdf" style="color: #ef4444;"></i></h1>
+                <p>Upload your PDF resume to extract text and generate an AI skill analysis</p>
+            </div>
+
+            <div class="card-box" style="max-width: 620px;">
+                <form id="uploadForm">
+                    <label style="display:block; margin-bottom:12px; font-weight:700; color:var(--text-dark);">Select Resume File (PDF only):</label>
+                    
+                    <div style="border: 2px dashed #cbd5e1; padding: 30px; border-radius: 12px; text-align: center; background: #fafafa; margin-bottom: 24px; transition: var(--transition);">
+                        <i class="fa-solid fa-cloud-arrow-up" style="font-size: 42px; color: var(--primary); margin-bottom: 12px;"></i>
+                        <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 15px;">Drag & drop your PDF file here or browse</p>
+                        <input type="file" id="resume" accept=".pdf" required class="no-icon" style="max-width: 320px; background: white;">
+                    </div>
+
+                    <button type="submit" id="submitBtn">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Upload & Analyze Resume
+                    </button>
+                </form>
+
+                <p id="message" style="margin-top:20px; font-size: 15px; font-weight: 600; text-align: center;"></p>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="js/upload.js"></script>
+
+</body>
+
+</html>

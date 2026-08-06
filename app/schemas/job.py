@@ -7,7 +7,7 @@ class JobCreate(BaseModel):
     location: str
     description: str
     required_skills: str
-    experience_level: str
+    experience_level: str = "Junior"
 
 
 class JobResponse(BaseModel):
