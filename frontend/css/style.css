@@ -528,6 +528,31 @@ button:disabled {
     gap: 8px;
 }
 
+/* Badges */
+.badge {
+    display: inline-block;
+    padding: 6px 14px;
+    margin: 4px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    background: #eeeffe;
+    color: #4f46e5;
+    border: 1px solid rgba(79, 70, 229, 0.2);
+}
+
+.badge-tech {
+    background: #eef2ff;
+    color: #4338ca;
+    border: 1px solid #c7d2fe;
+}
+
+.badge-soft {
+    background: #ecfdf5;
+    color: #047857;
+    border: 1px solid #a7f3d0;
+}
+
 /* Responsive Breakpoints */
 @media (max-width: 900px) {
     .dashboard {

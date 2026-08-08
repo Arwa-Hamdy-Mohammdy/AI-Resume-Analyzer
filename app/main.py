@@ -8,6 +8,8 @@ from app.routers.resume import router as resume_router
 from app.models.resume import Resume
 from app.models.resume_analysis import ResumeAnalysis
 from app.routers.job_match_router import router as job_match_router
+from app.routers.analysis import router as analysis_router
+from app.routers.rag_router import router as rag_router
 from fastapi.middleware.cors import CORSMiddleware
 
 Base.metadata.create_all(bind=engine)
@@ -28,8 +30,11 @@ app.include_router(auth_router)
 app.include_router(jobs_router)
 app.include_router(resume_router)
 app.include_router(job_match_router)
+app.include_router(analysis_router)
+app.include_router(rag_router)
+
 @app.get("/")
 def home():
     return {
         "message": "Welcome to AI Resume Analyzer API"
-    }
+    }

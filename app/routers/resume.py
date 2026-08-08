@@ -67,3 +67,27 @@ def get_resume_analysis(
         db,
         resume_id
     )
+
+from pydantic import BaseModel
+
+class SkillsUpdateRequest(BaseModel):
+    technical_skills: list[str] = []
+    soft_skills: list[str] = []
+
+@router.put(
+    "/{resume_id}/skills",
+    response_model=ResumeAnalysisResponse
+)
+def update_resume_skills(
+    resume_id: int,
+    request: SkillsUpdateRequest,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    return resume_service.update_skills(
+        db=db,
+        resume_id=resume_id,
+        technical_skills=request.technical_skills,
+        soft_skills=request.soft_skills,
+        current_user=current_user
+    )

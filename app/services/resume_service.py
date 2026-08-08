@@ -108,18 +108,33 @@ class ResumeService:
             )
 
         # Save Analysis
+        tech_skills = analysis_json.get("technical_skills", [])
+        soft_sk = analysis_json.get("soft_skills", [])
+        combined_skills = analysis_json.get("skills", [])
+        if not combined_skills:
+            combined_skills = list(set(tech_skills + soft_sk))
+
+        score_val = analysis_json.get("overall_score", 75)
+        try:
+            score_val = int(score_val)
+        except (ValueError, TypeError):
+            score_val = 75
+
         resume_analysis = ResumeAnalysis(
             resume_id=resume.id,
             summary=analysis_json.get("summary", ""),
-            skills=json.dumps(
-                analysis_json.get("skills", [])
-            ),
+            skills=json.dumps(combined_skills),
+            technical_skills=json.dumps(tech_skills),
+            soft_skills=json.dumps(soft_sk),
             education=json.dumps(
                 analysis_json.get("education", [])
             ),
             experience=json.dumps(
                 analysis_json.get("experience", [])
-            )
+            ),
+            strengths=json.dumps(analysis_json.get("strengths", [])),
+            weaknesses=json.dumps(analysis_json.get("weaknesses", [])),
+            overall_score=score_val
         )
 
         self.analysis_repository.create(
@@ -173,3 +188,28 @@ class ResumeService:
             )
 
         return analysis
+
+    def update_skills(
+        self,
+        db: Session,
+        resume_id: int,
+        technical_skills: list[str],
+        soft_skills: list[str],
+        current_user: User
+    ):
+        resume = self.resume_repository.get_by_id(db, resume_id)
+        if not resume or resume.user_id != current_user.id:
+            raise HTTPException(status_code=404, detail="Resume not found or access denied.")
+
+        analysis = self.analysis_repository.get_by_resume_id(db, resume_id)
+        if not analysis:
+            raise HTTPException(status_code=404, detail="Analysis not found.")
+
+        combined = list(dict.fromkeys(technical_skills + soft_skills))
+        analysis.technical_skills = json.dumps(technical_skills)
+        analysis.soft_skills = json.dumps(soft_skills)
+        analysis.skills = json.dumps(combined)
+
+        db.commit()
+        db.refresh(analysis)
+        return analysis

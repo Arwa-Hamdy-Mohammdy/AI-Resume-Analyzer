@@ -18,3 +18,17 @@ class JobMatchResponse(BaseModel):
     model_config = {
         "from_attributes": True
     }
+
+
+class JobRecommendationResponse(BaseModel):
+    job_id: int
+    title: str
+    company: str
+    location: str
+    experience_level: str
+    description: str
+    required_skills: str
+    match_score: int
+    matched_skills: list[str]
+    missing_skills: list[str]
+    resume_id: int

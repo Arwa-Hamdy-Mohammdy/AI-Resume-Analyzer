@@ -44,4 +44,34 @@ class JobRepository:
         db.commit()
         db.refresh(db_job)
 
-        return db_job    
+        return db_job
+
+    def search(
+        self,
+        db: Session,
+        q: str = None,
+        location: str = None,
+        experience_level: str = None,
+        company: str = None
+    ):
+        query = db.query(Job)
+
+        if q:
+            pattern = f"%{q.strip()}%"
+            query = query.filter(
+                (Job.title.ilike(pattern)) |
+                (Job.description.ilike(pattern)) |
+                (Job.required_skills.ilike(pattern)) |
+                (Job.company.ilike(pattern))
+            )
+
+        if location:
+            query = query.filter(Job.location.ilike(f"%{location.strip()}%"))
+
+        if experience_level:
+            query = query.filter(Job.experience_level.ilike(f"%{experience_level.strip()}%"))
+
+        if company:
+            query = query.filter(Job.company.ilike(f"%{company.strip()}%"))
+
+        return query.all()

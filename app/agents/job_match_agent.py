@@ -21,27 +21,22 @@ class JobMatchAgent:
         prompt = f"""
 You are an ATS and HR expert.
 
-Compare the resume with the job description.
+Compare the resume with the target job description.
 
 IMPORTANT RULES:
+- Respond with ONLY a valid JSON object.
+- Do NOT write explanations or markdown code blocks (```json).
+- "match_score" MUST be an integer between 0 and 100 representing overall ATS compatibility.
+- "strengths" MUST ONLY contain candidate skills, tools, or experience that DIRECTLY MATCH the requirements of this target job. Do NOT list irrelevant candidate skills (e.g., do NOT list frontend skills like React for a backend Python role unless requested).
+- "missing_skills" MUST contain required skills, frameworks, or experience from the job description that are missing in the candidate's resume.
+- "recommendations" MUST contain 2 to 4 actionable recommendations for the candidate to improve their fit for this specific job.
 
-- Respond with ONLY a JSON object.
-- Do NOT write explanations.
-- Do NOT write "Here is the JSON".
-- Do NOT use markdown.
-- Do NOT use ```json.
-- Do NOT add reasoning.
-- "match_score" MUST be a calculated integer between 0 and 100 based on how well the resume matches the job description.
-- Output must start with {{
-- Output must end with }}
-
-Return exactly this JSON schema structure (calculate the actual match_score number, do not keep 0):
-
+Return exactly this JSON structure:
 {{
     "match_score": 75,
-    "missing_skills": [],
-    "strengths": [],
-    "recommendations": []
+    "missing_skills": ["Skill1", "Skill2"],
+    "strengths": ["MatchedSkill1", "MatchedSkill2"],
+    "recommendations": ["Recommendation 1", "Recommendation 2"]
 }}
 
 Resume:
@@ -55,6 +50,10 @@ Job Description:
             model="meta-llama/Llama-3.1-8B-Instruct",
             messages=[
                 {
+                    "role": "system",
+                    "content": "You are a JSON ATS API. You return matching evaluation between a resume and a job description."
+                },
+                {
                     "role": "user",
                     "content": prompt
                 }
@@ -62,4 +61,4 @@ Job Description:
             temperature=0
         )
 
-        return response.choices[0].message.content
+        return response.choices[0].message.content

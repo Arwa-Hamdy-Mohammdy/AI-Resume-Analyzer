@@ -102,6 +102,34 @@
                 <p id="jobFormMessage" style="margin-top: 15px; font-weight: 600;"></p>
             </div>
 
+            <div class="card-box" style="margin-bottom: 30px;">
+                <h3 style="margin-bottom: 14px; font-size: 18px; color: var(--text-dark); display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-magnifying-glass" style="color: var(--primary);"></i> Search & Filter Jobs (Multi-Criteria)
+                </h3>
+                <div style="display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 12px; align-items: center;">
+                    <div class="input-group" style="margin-bottom: 0;">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="searchQuery" placeholder="Search by title, skills, keywords...">
+                    </div>
+                    <div class="input-group" style="margin-bottom: 0;">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <input type="text" id="searchLocation" placeholder="Location...">
+                    </div>
+                    <div class="input-group" style="margin-bottom: 0;">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <select id="searchLevel" class="no-icon">
+                            <option value="">All Experience Levels</option>
+                            <option value="Junior">Junior</option>
+                            <option value="Mid-Level">Mid-Level</option>
+                            <option value="Senior">Senior</option>
+                        </select>
+                    </div>
+                    <button id="searchBtn" type="button" class="btn-primary" style="width: auto; padding: 12px 24px; white-space: nowrap;">
+                        <i class="fa-solid fa-filter"></i> Filter
+                    </button>
+                </div>
+            </div>
+
             <h2 style="font-size: 20px; font-weight: 800; color: var(--text-dark); margin-bottom: 18px;">Available Job Positions</h2>
             <div id="jobsList">
                 <p style="color: var(--text-muted); font-weight: 500;">Loading jobs...</p>

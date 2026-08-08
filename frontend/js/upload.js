@@ -11,9 +11,13 @@ const logoutBtn = document.getElementById("logoutBtn");
 if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
         localStorage.removeItem("token");
+        localStorage.removeItem("resume_id");
+        localStorage.removeItem("last_match_result");
+        localStorage.removeItem("target_job_id");
         window.location.href = "index.html";
     });
 }
+
 
 const form = document.getElementById("uploadForm");
 

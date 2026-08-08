@@ -8,6 +8,9 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <!-- Chart.js & html2pdf.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 
 <body>
@@ -56,9 +59,14 @@
         </div>
 
         <div class="content">
-            <div class="content-header">
-                <h1>Resume Analysis <i class="fa-solid fa-brain" style="color: #6366f1;"></i></h1>
-                <p>Comprehensive AI-generated insights extracted from your resume</p>
+            <div class="content-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                <div>
+                    <h1>Resume Analysis <i class="fa-solid fa-brain" style="color: #6366f1;"></i></h1>
+                    <p>Comprehensive AI-generated insights extracted from your resume</p>
+                </div>
+                <button id="exportPdfBtn" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(16,185,129,0.25);">
+                    <i class="fa-solid fa-file-pdf"></i> Download PDF Report
+                </button>
             </div>
 
             <div id="loading" style="text-align: center; padding: 60px 20px;">
@@ -77,14 +85,59 @@
 
             <div id="analysisContent" style="display: none;" class="card-box">
                 
+                <div style="display: flex; align-items: center; justify-content: space-between; background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); color: white; padding: 20px 24px; border-radius: 12px; margin-bottom: 24px; flex-wrap: wrap; gap: 15px;">
+                    <div>
+                        <h2 style="font-size: 22px; margin-bottom: 6px;"><i class="fa-solid fa-award"></i> Resume Overall Quality Score</h2>
+                        <p style="opacity: 0.9; font-size: 14px;">Evaluated based on completeness, impact, and skill balance</p>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 20px;">
+                        <div style="width: 90px; height: 90px; position: relative;">
+                            <canvas id="scoreGaugeChart"></canvas>
+                        </div>
+                        <div style="text-align: center; background: rgba(255,255,255,0.2); padding: 12px 24px; border-radius: 12px; backdrop-filter: blur(4px);">
+                            <span id="scoreVal" style="font-size: 36px; font-weight: 800; display: block; line-height: 1;">85</span>
+                            <span style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9;">/ 100 Points</span>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="analysis-section">
                     <h3><i class="fa-solid fa-file-lines"></i> Executive Summary</h3>
                     <div class="analysis-box" id="summaryBox"></div>
                 </div>
 
-                <div class="analysis-section">
-                    <h3><i class="fa-solid fa-lightbulb"></i> Extracted Skills</h3>
-                    <div id="skillsBox" style="margin-top: 10px;"></div>
+                <!-- Technical & Soft Skills Section with Edit Controls -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">
+                    <div class="analysis-section" style="margin-bottom: 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <h3 style="margin: 0;"><i class="fa-solid fa-laptop-code" style="color:#6366f1;"></i> Technical Skills</h3>
+                            <button id="addTechSkillBtn" style="background: #e0e7ff; color: #4338ca; border: none; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 700; cursor: pointer;">
+                                <i class="fa-solid fa-plus"></i> Add Skill
+                            </button>
+                        </div>
+                        <div id="techSkillsBox"></div>
+                    </div>
+
+                    <div class="analysis-section" style="margin-bottom: 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <h3 style="margin: 0;"><i class="fa-solid fa-users" style="color:#10b981;"></i> Soft Skills</h3>
+                            <button id="addSoftSkillBtn" style="background: #d1fae5; color: #065f46; border: none; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 700; cursor: pointer;">
+                                <i class="fa-solid fa-plus"></i> Add Skill
+                            </button>
+                        </div>
+                        <div id="softSkillsBox"></div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">
+                    <div class="analysis-section" style="margin-bottom: 0;">
+                        <h3 style="color: #059669;"><i class="fa-solid fa-circle-check"></i> Candidate Strengths</h3>
+                        <div class="list-box" id="strengthsBox" style="margin-top: 10px;"></div>
+                    </div>
+                    <div class="analysis-section" style="margin-bottom: 0;">
+                        <h3 style="color: #dc2626;"><i class="fa-solid fa-triangle-exclamation"></i> Areas for Improvement</h3>
+                        <div class="list-box" id="weaknessesBox" style="margin-top: 10px;"></div>
+                    </div>
                 </div>
 
                 <div class="analysis-section">
@@ -108,3 +161,4 @@
 </body>
 
 </html>
+

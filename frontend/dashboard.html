@@ -8,6 +8,8 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -103,6 +105,38 @@
                     </div>
                 </a>
 
+            </div>
+
+            <!-- Top AI Job Recommendations Section -->
+            <div style="margin-top: 40px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+                    <div>
+                        <h2 style="font-size: 22px; font-weight: 800; color: var(--text-dark); display: flex; align-items: center; gap: 10px;">
+                            <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--primary);"></i> AI Recommended Jobs For You
+                        </h2>
+                        <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Top positions matching your uploaded resume skills</p>
+                    </div>
+                    <a href="matching.html" style="color: var(--primary); text-decoration: none; font-weight: 700; font-size: 14px; display: inline-flex; align-items: center; gap: 6px;">
+                        View All Matches <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div id="recommendationsContainer">
+                    <div style="text-align: center; padding: 30px; background: white; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                        <i class="fa-solid fa-spinner fa-spin" style="font-size: 24px; color: var(--primary); margin-bottom: 10px;"></i>
+                        <p style="color: var(--text-muted); font-size: 14px;">Loading top job recommendations...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Match Evaluations & Analytics History -->
+            <div style="margin-top: 40px;">
+                <h2 style="font-size: 20px; font-weight: 800; color: var(--text-dark); margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-clock-rotate-left" style="color: #6366f1;"></i> Recent Job Match Evaluations
+                </h2>
+                <div id="matchHistoryContainer" class="card-box" style="padding: 20px;">
+                    <p style="color: var(--text-muted); font-size: 14px;">Loading match history...</p>
+                </div>
             </div>
 
         </div>

@@ -53,3 +53,19 @@ class JobService:
             )
 
         return self.job_repository.update(db, db_job, job)
+
+    def search_jobs(
+        self,
+        db: Session,
+        q: str = None,
+        location: str = None,
+        experience_level: str = None,
+        company: str = None
+    ):
+        return self.job_repository.search(
+            db=db,
+            q=q,
+            location=location,
+            experience_level=experience_level,
+            company=company
+        )

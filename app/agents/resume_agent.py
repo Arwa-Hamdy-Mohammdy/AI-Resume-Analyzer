@@ -9,28 +9,34 @@ class ResumeAgent:
     def analyze_resume(self, resume_text: str):
 
         prompt = f"""
-You are a Resume Parsing API.
+You are an expert Resume Analyzer & Parsing API.
 
-Your job is ONLY to extract information from the resume.
+Your job is to analyze the resume and extract structured information.
 
 IMPORTANT RULES:
-
 - Return ONLY a valid JSON object.
 - Do NOT explain anything.
-- Do NOT add any text before the JSON.
-- Do NOT add any text after the JSON.
-- Do NOT use markdown.
-- Do NOT use ```json.
+- Do NOT add any text before or after the JSON.
+- Do NOT use markdown code blocks (```json).
 - Every key must exist.
-- If information is missing, return an empty string or empty list.
+- Separate technical hard skills (programming languages, frameworks, tools) from soft interpersonal skills.
+- CRITICAL: Every item in "technical_skills" and "soft_skills" MUST be a short, clean skill name (1 to 3 words max, e.g., ["Python", "FastAPI", "React", "Docker", "PostgreSQL", "JavaScript"]).
+- NEVER include full sentences, paragraphs, bullet points, or descriptions inside "technical_skills" or "soft_skills".
+- Evaluate candidate strengths and areas for improvement (weaknesses).
+- Calculate an overall_score (integer between 0 and 100) representing resume quality and completeness.
 
-Return EXACTLY this schema:
+Return EXACTLY this JSON schema structure:
 
 {{
-    "summary": "",
-    "skills": [],
-    "education": [],
-    "experience": []
+    "summary": "Executive summary of the candidate",
+    "skills": ["Combined list of short skill names"],
+    "technical_skills": ["Short technical skill names"],
+    "soft_skills": ["Short soft skill names"],
+    "education": ["Education degrees, universities, years"],
+    "experience": ["Work history roles, companies, dates"],
+    "strengths": ["Key candidate strengths"],
+    "weaknesses": ["Key areas for improvement"],
+    "overall_score": 85
 }}
 
 Resume:
@@ -43,7 +49,7 @@ Resume:
             messages=[
                 {
                     "role": "system",
-                    "content": "You are a JSON API. You ONLY return valid JSON."
+                    "content": "You are a JSON API. You ONLY return valid JSON with short 1-3 word skill tags."
                 },
                 {
                     "role": "user",
@@ -51,7 +57,7 @@ Resume:
                 }
             ],
             temperature=0,
-            max_tokens=700
+            max_tokens=900
         )
 
         return response.choices[0].message.content.strip()

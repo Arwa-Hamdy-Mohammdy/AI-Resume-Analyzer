@@ -10,15 +10,31 @@ const logoutBtn = document.getElementById("logoutBtn");
 if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
         localStorage.removeItem("token");
+        localStorage.removeItem("resume_id");
+        localStorage.removeItem("last_match_result");
+        localStorage.removeItem("target_job_id");
         window.location.href = "index.html";
     });
 }
 
-async function loadJobs() {
+
+async function loadJobs(queryParams = {}) {
     const jobsListEl = document.getElementById("jobsList");
 
     try {
-        const response = await fetch(`${API_URL}/jobs/`, {
+        let url = `${API_URL}/jobs/`;
+        
+        // Build search URL if any parameters provided
+        const params = new URLSearchParams();
+        if (queryParams.q) params.append("q", queryParams.q);
+        if (queryParams.location) params.append("location", queryParams.location);
+        if (queryParams.experience_level) params.append("experience_level", queryParams.experience_level);
+
+        if ([...params].length > 0) {
+            url = `${API_URL}/jobs/search?${params.toString()}`;
+        }
+
+        const response = await fetch(url, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -32,7 +48,7 @@ async function loadJobs() {
         const jobs = await response.json();
 
         if (!jobs || jobs.length === 0) {
-            jobsListEl.innerHTML = "<p style='color:#666;'>No jobs posted yet. Create one above!</p>";
+            jobsListEl.innerHTML = "<p style='color:#666;'>No jobs matching your filter criteria.</p>";
             return;
         }
 
@@ -54,9 +70,12 @@ async function loadJobs() {
             }
 
             card.innerHTML = `
-                <h3>${job.title}</h3>
+                <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                    <h3>${job.title}</h3>
+                    <span style="background:#eeeffe; color:#4f46e5; font-size:12px; font-weight:700; padding:4px 10px; border-radius:12px;">${job.experience_level || 'Junior'}</span>
+                </div>
                 <div class="company">🏢 ${job.company} • 📍 ${job.location || 'Remote'}</div>
-                <p>${job.description || ''}</p>
+                <p style="margin-bottom:12px; color:#475569; font-size:14px;">${job.description || ''}</p>
                 <div class="skills">${skillsHtml}</div>
             `;
 
@@ -67,6 +86,28 @@ async function loadJobs() {
         console.error("Error loading jobs:", err);
         jobsListEl.innerHTML = "<p style='color:red;'>Network error while loading jobs.</p>";
     }
+}
+
+// Setup search & filter listeners
+function setupSearchListeners() {
+    const searchBtn = document.getElementById("searchBtn");
+    const qInput = document.getElementById("searchQuery");
+    const locInput = document.getElementById("searchLocation");
+    const levelSelect = document.getElementById("searchLevel");
+
+    const triggerSearch = () => {
+        const queryParams = {
+            q: qInput ? qInput.value.trim() : "",
+            location: locInput ? locInput.value.trim() : "",
+            experience_level: levelSelect ? levelSelect.value : ""
+        };
+        loadJobs(queryParams);
+    };
+
+    if (searchBtn) searchBtn.addEventListener("click", triggerSearch);
+    if (qInput) qInput.addEventListener("keyup", (e) => { if (e.key === "Enter") triggerSearch(); });
+    if (locInput) locInput.addEventListener("keyup", (e) => { if (e.key === "Enter") triggerSearch(); });
+    if (levelSelect) levelSelect.addEventListener("change", triggerSearch);
 }
 
 const createJobForm = document.getElementById("createJobForm");
@@ -134,4 +175,7 @@ if (createJobForm) {
     });
 }
 
-document.addEventListener("DOMContentLoaded", loadJobs);
+document.addEventListener("DOMContentLoaded", () => {
+    loadJobs();
+    setupSearchListeners();
+});
